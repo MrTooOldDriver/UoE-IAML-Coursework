@@ -47,7 +47,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %--------------------------------------------------------
 % IMPORTANT: Specify your Student ID below. You will need to uncomment the line, else compilation will fail. Make sure to specify your student ID correctly, otherwise we may not be able to identify your work and you will be marked as missing.
-%\newcommand{\assignmentAuthorName}{s1234567}
+\newcommand{\assignmentAuthorName}{s1904845}
 %--------------------------------------------------------
 
 \begin{document}
@@ -70,7 +70,10 @@
 
 
 \begin{answerbox}{10em}
-Your Answer Here
+We have two attributes in the dataset. For both attributes, we have 50 observations and both data type are float64.  The first attribute is revision time, which ranges from 2.723 to 48.011, with mean 22.220020. The second attribute is exam score, which ranges from 14.731 to 94.945, with mean 49.919860.
+% \begin{center}
+%     \includegraphics[width=0.4\textwidth]{20211018145355.png}
+% \end{center}
 \end{answerbox}
 
 
@@ -92,7 +95,7 @@ For this part, you should use the sklearn implementation of \href{https://scikit
 
 
 \begin{answerbox}{10em}
-Your Answer Here
+The estimated model parameters is $w = [ 17.89768026,  1.44114091]$. This result shows the student with 0 revision time will score 17.89768026 in the exam. And as the revision time increases by 1, the exam score will increase by 1.44114091.
 \end{answerbox}
 
 
@@ -108,7 +111,9 @@ Your Answer Here
 
 
 \begin{answerbox}{35em}
-Your Answer Here
+\begin{center}
+    \includegraphics[width=1\textwidth]{fitted_linear_model.jpg}
+\end{center}
 \end{answerbox}
 
 
@@ -127,7 +132,12 @@ It should only take a few lines (i.e. <5).\\
 
 
 \begin{answerbox}{20em}
-Your Answer Here
+\begin{verbatim}
+pseudo_inverse = np.linalg.inv(np.dot(x_train.T,x_train))
+pseudo_inverse = np.dot(pseudo_inverse, x_train.T)
+phi_w = np.dot(pseudo_inverse, y_train)
+phi_w
+\end{verbatim}
 \end{answerbox}
 
 
@@ -145,7 +155,7 @@ Write out the expression for MSE and list one of its limitations. \\
 
 
 \begin{answerbox}{10em}
-Your Answer Here
+$MSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n}(\hat{y_i}-y_i)^2  }$
 \end{answerbox}
 
 
@@ -164,7 +174,7 @@ Comment on any differences in their performance.
 
 
 \begin{answerbox}{10em}
-Your Answer Here
+Closed-form solution has $MSE=5.5664596122258265$. Sklearn solution has $MSE=5.566459612225826$. There is only a very small difference between both solutions. Sklearn solution is slightly better compared to closed form solution. This might cause by using precise data type in my closed form solution.
 \end{answerbox}
 
 
