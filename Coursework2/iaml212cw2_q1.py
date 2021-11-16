@@ -1,4 +1,3 @@
-
 ##########################################################
 #  Python script template for Question 1 (IAML Level 10)
 #  Note that
@@ -10,7 +9,7 @@
 #  - You do not need to include this header in your submission.
 ##########################################################
 
-#--- Code for loading modules and the data set and pre-processing --->
+# --- Code for loading modules and the data set and pre-processing --->
 # NB: You can edit the following and add code (e.g. code for loading sklearn) if necessary.
 
 import numpy as np
@@ -18,46 +17,76 @@ import scipy
 import matplotlib.pyplot as plt
 import seaborn as sns
 from iaml_cw2_helpers import *
-# from iaml212cw2_my_helpers import *
+from iaml212cw2_my_helpers import *
+X, Y = load_Q1_dataset()
+print('X: ', X.shape, 'Y: ', Y.shape)
+Xtrn = X[100:, :]; Ytrn = Y[100:] #traning dataset
+Xtst = X[0: 100, :]; Ytst = Y[0: 100] #test dataset
 
-#<----
+print_versions()
+# <----
 
 # Q1.1
 def iaml212cw2_q1_1():
-#
-# iaml212cw2_q1_1()   # comment this out when you run the function
+    fig, ax = plt.subplots(3, 3)
+    for i in range(len(Xtrn[0])):
+        Xa = []
+        Xb = []
+        for j in range(len(Xtrn)):
+            if Ytrn[j] == 0:
+                Xa.append(Xtrn[j][i])
+            elif Ytrn[j] == 1:
+                Xb.append(Xtrn[j][i])
+            else:
+                print("Unexpected class {0}".format(Ytrn[j]))
+        ax[i].hist([Xa, Xb], bins=15)
+
+
+iaml212cw2_q1_1()   # comment this out when you run the function
 
 # Q1.2
-def iaml212cw2_q1_2():
+# def iaml212cw2_q1_2():
+
+
 #
 # iaml212cw2_q1_2()   # comment this out when you run the function
 
 # Q1.4
-def iaml212cw2_q1_4():
+# def iaml212cw2_q1_4():
+
+
 #
 # iaml212cw2_q1_4()   # comment this out when you run the function
 
 # Q1.5
-def iaml212cw2_q1_5():
+# def iaml212cw2_q1_5():
+
+
 #
 # iaml212cw2_q1_5()   # comment this out when you run the function
 
 # Q1.6
-def iaml212cw2_q1_6():
+# def iaml212cw2_q1_6():
+
+
 #
 # iaml212cw2_q1_6()   # comment this out when you run the function
 
 # Q1.8
-def iaml212cw2_q1_8():
+# def iaml212cw2_q1_8():
+
+
 #
 # iaml212cw2_q1_8()   # comment this out when you run the function
 
 # Q1.9
-def iaml212cw2_q1_9():
+# def iaml212cw2_q1_9():
+
+
 #
 # iaml212cw2_q1_9()   # comment this out when you run the function
 
 # Q1.10
-def iaml212cw2_q1_10():
+# def iaml212cw2_q1_10():
 #
 # iaml212cw2_q1_10()   # comment this out when you run the function
