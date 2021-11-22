@@ -24,12 +24,17 @@ from sklearn.svm import SVC
 
 from iaml_cw2_helpers import *
 from iaml212cw2_my_helpers import *
+
 X, Y = load_Q1_dataset()
 print('X: ', X.shape, 'Y: ', Y.shape)
-Xtrn = X[100:, :]; Ytrn = Y[100:] #traning dataset
-Xtst = X[0: 100, :]; Ytst = Y[0: 100] #test dataset
+Xtrn = X[100:, :];
+Ytrn = Y[100:]  # traning dataset
+Xtst = X[0: 100, :];
+Ytst = Y[0: 100]  # test dataset
 
 print_versions()
+
+
 # <----
 
 # Q1.1
@@ -49,11 +54,13 @@ def iaml212cw2_q1_1():
         ax_now.hist([Xa, Xb], bins=15)
         ax_now.grid()
         ax_now.set_xlabel("A{0}".format(i))
-        ax_now.set_ylabel("Values")
+        ax_now.set_ylabel('Frequency')
         ax_now.legend(["Class0", "Class1"], loc="upper right")
-    fig.savefig('q1.1.jpg')
+    fig.savefig('q1.1.jpg', bbox_inches='tight')
 
-iaml212cw2_q1_1()   # comment this out when you run the function
+
+iaml212cw2_q1_1()  # comment this out when you run the function
+
 
 # Q1.2
 def iaml212cw2_q1_2():
@@ -65,17 +72,19 @@ def iaml212cw2_q1_2():
         r.append(r_value)
         print("A{0} correlation coefficients is {1:.3f}".format(i, r_value))
 
-iaml212cw2_q1_2()   # comment this out when you run the function
+
+iaml212cw2_q1_2()  # comment this out when you run the function
+
 
 # Q1.4
 def iaml212cw2_q1_4():
     variance_array = dict()
     for i in range(len(Xtrn[0])):
         x_ith_feature_array = [elem[i] for elem in Xtrn]
-        variance_array["A{0}".format(i)] = np.var(x_ith_feature_array)
+        variance_array["A{0}".format(i)] = np.var(x_ith_feature_array, ddof=1)
     variance_array = dict(reversed(sorted(variance_array.items(), key=lambda item: item[1])))
     sum_of_variances = np.sum(list(variance_array.values()))
-    print('Sum of all the variances: {0:.3f}'.format(sum_of_variances))
+    print('Sum of all biased sample variance variances: {0:.3f}'.format(sum_of_variances))
     fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
     ax[0].bar(variance_array.keys(), variance_array.values())
@@ -91,9 +100,11 @@ def iaml212cw2_q1_4():
     ax[1].set_ylabel("The Cumulative variance ratio")
     ax[1].set_title('The cumulative variance ratio against the number of attributes')
     ax[1].set_xticks(np.arange(len(variance_cumulative_ratio_array)))
-    fig.savefig('q1.4.jpg')
+    fig.savefig('q1.4.jpg',bbox_inches='tight')
 
-iaml212cw2_q1_4()   # comment this out when you run the function
+
+iaml212cw2_q1_4()  # comment this out when you run the function
+
 
 # Q1.5
 def iaml212cw2_q1_5():
@@ -128,7 +139,7 @@ def iaml212cw2_q1_5():
     ax[1].set_title('The cumulative variance ratio against the number of principal components')
     ax[1].set_xticks(np.arange(len(variance_cumulative_ratio_array)))
     ax[1].grid()
-    fig.savefig('q1.5b.jpg')
+    fig.savefig('q1.5b.jpg',bbox_inches='tight')
 
     pca_2d_class0 = []
     pca_2d_class1 = []
@@ -149,7 +160,7 @@ def iaml212cw2_q1_5():
     plt.ylabel('PC2')
     plt.legend(["Class0", "Class1"], loc="upper right")
     plt.grid()
-    plt.savefig('q1.5c.jpg')
+    plt.savefig('q1.5c.jpg',bbox_inches='tight')
     plt.show()
 
     pc1 = [point[0] for point in pca_2d]
@@ -165,7 +176,9 @@ def iaml212cw2_q1_5():
     pca_correlation_coefficient = pd.DataFrame(data=[pc1_r, pc2_r], columns=labels, index=['PC1', 'PC2'])
     print(pca_correlation_coefficient)
 
-iaml212cw2_q1_5()   # comment this out when you run the function
+
+iaml212cw2_q1_5()  # comment this out when you run the function
+
 
 # Q1.6
 def iaml212cw2_q1_6():
@@ -177,7 +190,6 @@ def iaml212cw2_q1_6():
     sum_of_variances = np.sum(list(variance_array.values()))
     variance_cumulative_ratio_array = np.cumsum(list(variance_array.values())) / sum_of_variances
     variance_cumulative_ratio_array = np.insert(variance_cumulative_ratio_array, 0, 0)
-
 
     scaler = StandardScaler().fit(Xtrn)
     Xtrn_s = scaler.transform(Xtrn)
@@ -206,10 +218,7 @@ def iaml212cw2_q1_6():
     ax[1].set_title('The cumulative variance ratio against the number of principal components')
     ax[1].set_xticks(np.arange(len(variance_cumulative_ratio_array)))
     ax[1].grid()
-    fig.savefig('q1.6b.jpg')
-
-    print(pca_std.components_[0:2, :])
-    print(np.dot(pca_std.components_[0:2, :], Xtrn_s).transpose())
+    fig.savefig('q1.6b.jpg', bbox_inches='tight')
 
     pca_2d_class0 = []
     pca_2d_class1 = []
@@ -230,7 +239,7 @@ def iaml212cw2_q1_6():
     plt.ylabel('PC2')
     plt.legend(["Class0", "Class1"], loc="upper right")
     plt.grid()
-    plt.savefig('q1.6c.jpg')
+    plt.savefig('q1.6c.jpg',bbox_inches='tight')
     plt.show()
 
     pc1 = [point[0] for point in pca_2d]
@@ -246,7 +255,9 @@ def iaml212cw2_q1_6():
     pca_correlation_coefficient = pd.DataFrame(data=[pc1_r, pc2_r], columns=labels, index=['PC1', 'PC2'])
     pca_correlation_coefficient
 
-iaml212cw2_q1_6()   # comment this out when you run the function
+
+iaml212cw2_q1_6()  # comment this out when you run the function
+
 
 # Q1.8
 def iaml212cw2_q1_8():
@@ -282,14 +293,18 @@ def iaml212cw2_q1_8():
     plt.ylabel('Accuracy')
     plt.legend(["Training accuracy", "Test accuracy"], loc="upper right")
     plt.grid()
-    plt.savefig('q1.8.jpg')
+    plt.savefig('q1.8.jpg', bbox_inches='tight')
 
-    print('Best C is {0}'.format(C_value_list[5]))
+    print('Best C is {0:.4f}'.format(C_value_list[5]))
+    print('Best C svc train mean is {0:.4f}'.format(svc_train_result_mean[np.argmax(svc_train_result_mean)]))
+    print('Best C svc test mean is {0:.4f}'.format(svc_test_result_mean[np.argmax(svc_test_result_mean)]))
     clf = SVC(C=C_value_list[5]).fit(Xtrn_s, Ytrn)
     print('The number of instances correctly classified:{0} and classification accuracy: {1:.2f}'
           .format(len(Xtst_s) * clf.score(Xtst_s, Ytst), clf.score(Xtst_s, Ytst), ))
 
-iaml212cw2_q1_8()   # comment this out when you run the function
+
+iaml212cw2_q1_8()  # comment this out when you run the function
+
 
 # Q1.9
 def iaml212cw2_q1_9():
@@ -316,7 +331,7 @@ def iaml212cw2_q1_9():
     Z = coe * np.e ** (-0.5 * (variance_cov_matrix_inv[0, 0] * (Ztrn_X - mean_vector[0]) ** 2 +
                                (variance_cov_matrix_inv[0, 1] + variance_cov_matrix_inv[1, 0])
                                * (Ztrn_X - mean_vector[0]) * (Ztrn_Y - mean_vector[1]) + variance_cov_matrix_inv[1, 1] * (
-                                           Ztrn_Y - mean_vector[1]) ** 2))
+                                       Ztrn_Y - mean_vector[1]) ** 2))
 
     plt.figure(figsize=(12, 12))
     plt.contour(np.linspace(0, 50), np.linspace(0, 50), Z)
@@ -327,10 +342,12 @@ def iaml212cw2_q1_9():
     plt.ylabel('A7')
     plt.legend(["Class0"], loc="upper right")
     plt.grid()
-    plt.savefig('q1.9.jpg')
+    plt.savefig('q1.9.jpg',bbox_inches='tight')
     plt.show()
 
-iaml212cw2_q1_9()   # comment this out when you run the function
+
+iaml212cw2_q1_9()  # comment this out when you run the function
+
 
 # Q1.10
 def iaml212cw2_q1_10():
@@ -364,7 +381,7 @@ def iaml212cw2_q1_10():
     Z = coe * np.e ** (-0.5 * (variance_cov_matrix_inv[0, 0] * (Ztrn_X - mean_vector[0]) ** 2 +
                                (variance_cov_matrix_inv[0, 1] + variance_cov_matrix_inv[1, 0])
                                * (Ztrn_X - mean_vector[0]) * (Ztrn_Y - mean_vector[1]) + variance_cov_matrix_inv[1, 1] * (
-                                           Ztrn_Y - mean_vector[1]) ** 2))
+                                       Ztrn_Y - mean_vector[1]) ** 2))
 
     plt.figure(figsize=(12, 12))
     plt.contour(np.linspace(0, 55), np.linspace(0, 55), Z)
@@ -376,8 +393,8 @@ def iaml212cw2_q1_10():
     plt.legend(["Class0"], loc="upper right")
     plt.grid()
     plt.rcParams.update({'font.size': 16})
-    plt.savefig('q1.10.jpg')
+    plt.savefig('q1.10.jpg',bbox_inches='tight')
     plt.show()
 
 
-iaml212cw2_q1_10()   # comment this out when you run the function
+iaml212cw2_q1_10()  # comment this out when you run the function
